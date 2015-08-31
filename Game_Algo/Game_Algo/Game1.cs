@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
@@ -19,10 +20,17 @@ namespace Game_Algo
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
+        SpriteManager spriteManager;
+
+        // Random number generator
+        public Random rnd { get; private set; }
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+
+            rnd = new Random();
         }
 
         /// <summary>
@@ -34,6 +42,8 @@ namespace Game_Algo
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+            spriteManager = new SpriteManager(this);
+            Components.Add(spriteManager);
 
             base.Initialize();
         }
