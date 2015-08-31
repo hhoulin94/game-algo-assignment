@@ -39,14 +39,14 @@ namespace Game_Algo
             player = new PlayerSprite(
                 Game.Content.Load<Texture2D>(@"Textures\Sprites\Player"),
                 Vector2.Zero,  //position
-                new Point(30, 30), // dimensions
+                MapSettings.TileSize, // dimensions
                 new Point(1, 1) // sheet size
                 );
 
             //guardsList.Add(new GuardSprite(
             //    Game.Content.Load<Texture2D>(@"Textures\Sprites\Player"),
             //    Vector2.Zero,  //position
-            //    new Point(30, 30), // dimensions
+            //    MapSettings.TileSize, // dimensions
             //    new Point(1, 1) // sheet size
             //    );
 
