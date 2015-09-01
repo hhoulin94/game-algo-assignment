@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Game_Algo
 {
-    static class MapSettings
+    static class MapSetting
     {
         static public Point MapSize = new Point(30, 20);
         static public Point TileSize = new Point(30, 30);
