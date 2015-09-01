@@ -12,6 +12,8 @@ namespace Game_Algo
     {
         static public Point PlayerStartPosition = new Point(28, 1);
 
+        static public Point PlayerSize = new Point(25, 25); // how many Tiles
+
         static public Point MapSize = new Point(30, 20); // how many Tiles
 
         static public Point TileSize = new Point(30, 30); // Tile dimensions (30px x 30px)

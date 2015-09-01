@@ -39,7 +39,7 @@ namespace Game_Algo
             player = new PlayerSprite(
                 Game.Content.Load<Texture2D>(@"Textures\Sprites\Player"),
                 GameSetting.PointToVector2(GameSetting.PlayerStartPosition), //position
-                GameSetting.TileSize, // dimensions
+                GameSetting.PlayerSize, // dimensions
                 new Point(1, 1) // sheet size
                 );
 
