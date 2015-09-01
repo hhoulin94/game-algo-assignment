@@ -22,6 +22,8 @@ namespace Game_Algo
 
         SpriteManager spriteManager;
 
+        Map myMap = new Map();
+
         // Random number generator
         public Random rnd { get; private set; }
 
@@ -29,6 +31,8 @@ namespace Game_Algo
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+            this.graphics.PreferredBackBufferWidth = GameSetting.WindowSize.X;
+            this.graphics.PreferredBackBufferHeight = GameSetting.WindowSize.Y;
 
             rnd = new Random();
         }
@@ -58,6 +62,7 @@ namespace Game_Algo
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
+            GameSetting.TileTextureSheet = Content.Load<Texture2D>(@"Textures\TileSets\Tileset");
         }
 
         /// <summary>
@@ -93,9 +98,12 @@ namespace Game_Algo
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
+            spriteBatch.Begin();
 
             // TODO: Add your drawing code here
+            myMap.Draw(spriteBatch);
 
+            spriteBatch.End();
             base.Draw(gameTime);
         }
     }
