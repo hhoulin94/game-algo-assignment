@@ -15,7 +15,7 @@ namespace Game_Algo
             : base(textureImage, position, spriteSize, sheetSize, gameMap)
         { }
 
-        public void UpdateMovement()
+        private void UpdateMovement()
         {
             KeyboardState ks = Keyboard.GetState();
             if (ks.IsKeyDown(Keys.Up) || ks.IsKeyDown(Keys.W))
