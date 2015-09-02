@@ -5,8 +5,8 @@ using System.Text;
 
 namespace Game_Algo
 {
-    class MapRow
+    class TileRow
     {
-        public List<MapCell> Columns = new List<MapCell>();
+        public List<Tile> Columns = new List<Tile>();
     }
 }

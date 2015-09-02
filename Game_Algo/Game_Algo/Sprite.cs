@@ -20,21 +20,22 @@ namespace Game_Algo
         const int defaultMillisecondsPerFrame = 16;
         protected Vector2 speed;
         public Vector2 position;
+        protected Map gameMap;
 
-        public abstract Vector2 velocity { get; }
+        // public abstract Vector2 direction { get; }
 
-        public Sprite(Texture2D textureImage, Vector2 position, Point spriteSize, Point sheetSize)
-            : this(textureImage, position, spriteSize, sheetSize, 
+        public Sprite(Texture2D textureImage, Vector2 position, Point spriteSize, Point sheetSize, Map gameMap)
+            : this(textureImage, position, spriteSize, sheetSize, gameMap,
               10, new Point(0, 0), new Vector2(2, 2), defaultMillisecondsPerFrame)
         { }
 
-        public Sprite(Texture2D textureImage, Vector2 position, Point spriteSize, Point sheetSize, 
+        public Sprite(Texture2D textureImage, Vector2 position, Point spriteSize, Point sheetSize, Map gameMap,
             int collisionOffset, Point currentFrame, Vector2 speed)
-            : this(textureImage, position, spriteSize, sheetSize, collisionOffset,
+            : this(textureImage, position, spriteSize, sheetSize, gameMap, collisionOffset,
               currentFrame, speed, defaultMillisecondsPerFrame)
         { }
 
-        public Sprite(Texture2D textureImage, Vector2 position, Point spriteSize, Point sheetSize, 
+        public Sprite(Texture2D textureImage, Vector2 position, Point spriteSize, Point sheetSize, Map gameMap,
             int collisionOffset, Point currentFrame, Vector2 speed, int millisecondsPerFrame)
         {
             this.textureImage = textureImage;
@@ -45,6 +46,7 @@ namespace Game_Algo
             this.currentFrame = currentFrame;
             this.speed = speed;
             this.millisecondsPerFrame = millisecondsPerFrame;
+            this.gameMap = gameMap;
         }
 
         public virtual void Update(GameTime gameTime)

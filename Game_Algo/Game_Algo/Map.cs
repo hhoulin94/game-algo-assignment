@@ -10,83 +10,43 @@ namespace Game_Algo
 {
     class Map
     {
-        public List<MapRow> Rows = new List<MapRow>();
-        public int Width = GameSetting.MapSize.X;
-        public int Height = GameSetting.MapSize.Y;
+        public List<TileRow> Rows = new List<TileRow>();
 
         public Map()
         {
-            string map = GameSetting.MapLayout.Level_01;
+            int mapStringIndex = 0;
+            string mapString = GameSetting.MapLayout.Level_01;
 
-            int mapIndex = 0;
-
-            for (int y = 0; y < Height; y++)
+            for (int y = 0; y < GameSetting.MapSize.Y; y++)
             {
-                MapRow thisRow = new MapRow();
-                for (int x = 0; x < Width; x++)
+                TileRow thisRow = new TileRow();
+                for (int x = 0; x < GameSetting.MapSize.X; x++)
                 {
-                    if (map[mapIndex].Equals('#'))
-                    {
-                        thisRow.Columns.Add(new MapCell(2));
-                        mapIndex++;
-                    }
-                    else if (map[mapIndex].Equals(' '))
-                    {
-                        thisRow.Columns.Add(new MapCell(3));
-                        mapIndex++;
-                    }
-                    else
-                    {
-                        thisRow.Columns.Add(new MapCell(3));
-                        mapIndex++;
-                    }
+                    Tile mapCell = parseMapChar(mapString[mapStringIndex]);
+                    thisRow.Columns.Add(mapCell);
+                    mapStringIndex++;
                 }
                 Rows.Add(thisRow);
             }
         }
 
-        public MapCell GetTileID(Vector2 WalkPosition) {
+        private Tile parseMapChar(char mapChar)
+        {
+            int cellTypeId = 0;
 
-            List<MapCell> IntersectTileID = new List<MapCell> ();
-            
-            for (int y = 0; y < Height; y++)
+            switch (mapChar)
             {
-               
-                for (int x = 0; x < Width; x++)
-                {
-                    Rectangle CurrentTile = new Rectangle(x * 32 , y * 32 , 32 , 32);
-                    Rectangle CurrentPlayerPosition = new Rectangle((int)WalkPosition.X , (int)WalkPosition.Y , 32 , 32);
-                    
-                    if (CurrentTile.Intersects(CurrentPlayerPosition))
-                    {
-                        IntersectTileID.Add(Rows[y].Columns[x]); 
-                    }
-                }
-               
-            }
-            int counter = 0 ;
-
-            foreach(MapCell CantWalk in IntersectTileID){
-                if (CantWalk.Id == 2 || counter == IntersectTileID.Count - 1)
-                {
-                    return CantWalk; 
-                }
+                case ' ':
+                    cellTypeId = 0;
+                    break;
+                case '#':
+                    cellTypeId = 1;
+                    break;
+                default:
+                    break;
             }
 
-            return null; 
-        }
-
-        public bool Walkable(Vector2 WalkPosition) {
-
-            if (GetTileID(WalkPosition) == null)
-                return true;
-
-            if (GetTileID(WalkPosition).Id == 2)
-                return false; 
-            
-            else
-                return true;
-
+            return new Tile(cellTypeId);
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -101,10 +61,34 @@ namespace Game_Algo
                             (x * GameSetting.TileSize.X),
                             (y * GameSetting.TileSize.Y),
                             GameSetting.TileSize.X, GameSetting.TileSize.Y),
-                        TileTexture.GetTextureRectangle(Rows[y].Columns[x].Id),
+                        TileTexture.GetTextureRectangle(Rows[y].Columns[x].TypeId),
                         Color.White);
                 }
             }
+        }
+
+        public bool CheckTileWalkable(Vector2 WalkPosition)
+        {
+            for (int y = 0; y < GameSetting.MapSize.Y; y++)
+            {
+                for (int x = 0; x < GameSetting.MapSize.X; x++)
+                {
+                    Rectangle currentTile = new Rectangle(GameSetting.TileSize.X * x, GameSetting.TileSize.Y * y,
+                                                          GameSetting.TileSize.X,     GameSetting.TileSize.Y);
+
+                    Rectangle currentPlayerPosition = new Rectangle((int)WalkPosition.X, (int)WalkPosition.Y,
+                                                                    GameSetting.TileSize.X, GameSetting.TileSize.Y);
+
+                    if (currentTile.Intersects(currentPlayerPosition))
+                    {
+                        Tile intersectingTile = Rows[y].Columns[x];
+                        if (!intersectingTile.Walkable)
+                            return false;
+                    }
+                }
+            }
+
+            return true;
         }
     }
 }

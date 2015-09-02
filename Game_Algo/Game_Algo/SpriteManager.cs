@@ -18,11 +18,12 @@ namespace Game_Algo
         PlayerSprite player;
         List<Sprite> guardsList = new List<Sprite>();
 
+        Map gameMap;
 
-        public SpriteManager(Game game)
+        public SpriteManager(Game game, Map gameMap)
             : base(game)
         {
-
+            this.gameMap = gameMap;
         }
 
         public override void Initialize()
@@ -39,8 +40,9 @@ namespace Game_Algo
             player = new PlayerSprite(
                 Game.Content.Load<Texture2D>(@"Textures\Sprites\Player"),
                 GameSetting.PointToVector2(GameSetting.PlayerStartPosition), //position
-                GameSetting.PlayerSize, // dimensions
-                new Point(1, 1) // sheet size
+                GameSetting.TileSize, // dimensions
+                new Point(1, 1), // sheet size
+                gameMap
                 );
 
             //guardsList.Add(new GuardSprite(
@@ -58,14 +60,14 @@ namespace Game_Algo
             // Update player
             player.Update(gameTime);
 
-            // Update all sprites
-            foreach (Sprite s in guardsList)
-            {
-                s.Update(gameTime);
-                // Check for collisions and exit game if there is one
-                if (s.collisionRect.Intersects(player.collisionRect))
-                    Game.Exit();
-            }
+            // Update guards
+            //foreach (Sprite s in guardsList)
+            //{
+            //    s.Update(gameTime, gameMap);
+            //    // Check for collisions and exit game if there is one
+            //    if (s.collisionRect.Intersects(player.collisionRect))
+            //        Game.Exit();
+            //}
 
             base.Update(gameTime);
         }

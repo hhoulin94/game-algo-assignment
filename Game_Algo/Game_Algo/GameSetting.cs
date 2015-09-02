@@ -17,6 +17,7 @@ namespace Game_Algo
         static public Point MapSize = new Point(30, 20); // how many Tiles
 
         static public Point TileSize = new Point(30, 30); // Tile dimensions (30px x 30px)
+
         static public Texture2D TileTextureSheet;
         
         static public Point WindowSize
@@ -53,6 +54,12 @@ namespace Game_Algo
                 "#                # # #       #" + // 17
                 "#                            #" + // 18
                 "##############################";  // 19
+        }
+
+        public struct TileType
+        {
+            static public int Floor = 0;
+            static public int Wall = 1;
         }
 
         static public Vector2 PointToVector2(Point PointOnMap)

@@ -73,7 +73,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Map.cs" />
-    <Compile Include="MapRow.cs" />
+    <Compile Include="TileRow.cs" />
     <Compile Include="GameSetting.cs" />
     <Compile Include="PlayerSprite.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -81,7 +81,7 @@
     <Compile Include="Game1.cs" />
     <Compile Include="Sprite.cs" />
     <Compile Include="SpriteManager.cs" />
-    <Compile Include="MapCell.cs" />
+    <Compile Include="Tile.cs" />
     <Compile Include="TileTexture.cs" />
   </ItemGroup>
   <ItemGroup>

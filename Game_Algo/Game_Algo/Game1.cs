@@ -46,7 +46,7 @@ namespace Game_Algo
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            spriteManager = new SpriteManager(this);
+            spriteManager = new SpriteManager(this, myMap);
             Components.Add(spriteManager);
 
             base.Initialize();
