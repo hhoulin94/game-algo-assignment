@@ -22,7 +22,7 @@ namespace Game_Algo
         {
             get
             {
-                return (TypeId == GameSetting.TileType.Wall) ? false : true;
+                return (TypeId == GameSetting.TileType.Floor || TypeId == GameSetting.TileType.DoorUnlocked);
             }
         }
 
