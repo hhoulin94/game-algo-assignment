@@ -89,5 +89,11 @@ namespace Game_Algo
             }
         }
 
+        protected void MoveIfWalkable(Vector2 inputDirection)
+        {
+            if (gameMap.CheckTileWalkable(position + inputDirection))
+                position += inputDirection * speed;
+        }
+
     }
 }

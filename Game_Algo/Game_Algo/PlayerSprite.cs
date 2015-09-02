@@ -22,36 +22,26 @@ namespace Game_Algo
             {
                 Vector2 inputDirection = Vector2.Zero;
                 inputDirection.Y -= 1;
-                if (gameMap.CheckTileWalkable(position + inputDirection))
-                    position += inputDirection * speed;
+                MoveIfWalkable(inputDirection);
             }
             if (ks.IsKeyDown(Keys.Down) || ks.IsKeyDown(Keys.S))
             {
                 Vector2 inputDirection = Vector2.Zero;
                 inputDirection.Y += 1;
-                if (gameMap.CheckTileWalkable(position + inputDirection))
-                    position += inputDirection * speed;
+                MoveIfWalkable(inputDirection);
             }
             if (ks.IsKeyDown(Keys.Left) || ks.IsKeyDown(Keys.A))
             {
                 Vector2 inputDirection = Vector2.Zero;
                 inputDirection.X -= 1;
-                if (gameMap.CheckTileWalkable(position + inputDirection))
-                    position += inputDirection * speed;
+                MoveIfWalkable(inputDirection);
             }
             if (ks.IsKeyDown(Keys.Right) || ks.IsKeyDown(Keys.D))
             {
                 Vector2 inputDirection = Vector2.Zero;
                 inputDirection.X += 1;
-                if (gameMap.CheckTileWalkable(position + inputDirection))
-                    position += inputDirection * speed;
+                MoveIfWalkable(inputDirection);
             }
-        }
-
-        private void moveIfWalkable(Vector2 position, Vector2 inputDirection, Vector2 speed)
-        {
-            if (gameMap.CheckTileWalkable(position + inputDirection))
-                position += inputDirection * speed;
         }
 
         public override void Update(GameTime gameTime)
