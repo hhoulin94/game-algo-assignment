@@ -32,20 +32,7 @@ namespace Game_Algo
 
         private Tile parseMapChar(char mapChar)
         {
-            int cellTypeId = 0;
-
-            switch (mapChar)
-            {
-                case ' ':
-                    cellTypeId = 0;
-                    break;
-                case '#':
-                    cellTypeId = 1;
-                    break;
-                default:
-                    break;
-            }
-
+            int cellTypeId = GameSetting.GetTileTypeByChar(mapChar);
             return new Tile(cellTypeId);
         }
 
