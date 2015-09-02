@@ -46,10 +46,8 @@ namespace Game_Algo
                 if (gameMap.CheckTileWalkable(position + inputDirection))
                     position += inputDirection * speed;
             }
-
-            // return inputDirection * speed;
-            // return inputDirection;
         }
+
         private void moveIfWalkable(Vector2 position, Vector2 inputDirection, Vector2 speed)
         {
             if (gameMap.CheckTileWalkable(position + inputDirection))
@@ -58,14 +56,6 @@ namespace Game_Algo
 
         public override void Update(GameTime gameTime)
         {
-            // Move the sprite based on velocity
-            //Vector2 velocity = direction * speed;
-            //// position = (gameMap.CheckTileWalkable(newPosition)) ? newPosition : position;
-            //if (gameMap.CheckTileWalkable(position + direction))
-            //{
-            //    position += velocity;
-            //}
-
             UpdateMovement();
 
             base.Update(gameTime);
