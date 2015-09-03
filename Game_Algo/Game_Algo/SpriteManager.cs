@@ -16,7 +16,9 @@ namespace Game_Algo
     {
         SpriteBatch spriteBatch;
         PlayerSprite player;
-        List<Sprite> guardsList = new List<Sprite>();
+        GuardSprite guard;
+        
+        // List<Sprite> guardsList = new List<Sprite>();
 
         Map gameMap;
 
@@ -40,25 +42,30 @@ namespace Game_Algo
             player = new PlayerSprite(
                 Game.Content.Load<Texture2D>(@"Textures\Sprites\Player"),
                 GameSetting.PointToVector2(GameSetting.PlayerStartPosition), //position
+                GameSetting.PlayerSpeed,
                 GameSetting.TileSize, // dimensions
                 new Point(1, 1), // sheet size
                 gameMap
                 );
 
-            //guardsList.Add(new GuardSprite(
-            //    Game.Content.Load<Texture2D>(@"Textures\Sprites\Player"),
-            //    Vector2.Zero,  //position
-            //    MapSettings.TileSize, // dimensions
-            //    new Point(1, 1) // sheet size
-            //    );
+            guard = new GuardSprite(
+                Game.Content.Load<Texture2D>(@"Textures\Sprites\Guard"),
+                new Vector2(30 * 22, 30 * 4),  //position
+                GameSetting.PlayerSpeed,
+                GameSetting.TileSize, // dimensions
+                new Point(1, 1), // sheet size
+                gameMap,
+                this
+                );
 
             base.LoadContent();
         }
 
         public override void Update(GameTime gameTime)
         {
-            // Update player
             player.Update(gameTime);
+
+            guard.Update(gameTime);
 
             // Update guards
             //foreach (Sprite s in guardsList)
@@ -76,12 +83,13 @@ namespace Game_Algo
         {
             spriteBatch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend);
 
-            // Draw the player
             player.Draw(gameTime, spriteBatch);
 
+            guard.Draw(gameTime, spriteBatch);
+
             // Draw all sprites
-            foreach (Sprite s in guardsList)
-                s.Draw(gameTime, spriteBatch);
+            //foreach (Sprite s in guardsList)
+            //    s.Draw(gameTime, spriteBatch);
 
             spriteBatch.End();
             base.Draw(gameTime);
@@ -92,6 +100,11 @@ namespace Game_Algo
         public Vector2 GetPlayerPosition()
         {
             return player.position;
+        }
+
+        public Vector2 GetPlayerDirection()
+        {
+            return player.direction;
         }
     }
 }

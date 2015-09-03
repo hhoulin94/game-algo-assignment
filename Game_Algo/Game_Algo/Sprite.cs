@@ -19,24 +19,25 @@ namespace Game_Algo
         int millisecondsPerFrame;
         const int defaultMillisecondsPerFrame = 16;
         protected Vector2 speed;
+        public Vector2 direction;
         public Vector2 position;
         protected Map gameMap;
 
         // public abstract Vector2 direction { get; }
 
-        public Sprite(Texture2D textureImage, Vector2 position, Point spriteSize, Point sheetSize, Map gameMap)
-            : this(textureImage, position, spriteSize, sheetSize, gameMap,
-              10, new Point(0, 0), new Vector2(2, 2), defaultMillisecondsPerFrame)
+        public Sprite(Texture2D textureImage, Vector2 position, Vector2 speed, Point spriteSize, Point sheetSize, Map gameMap)
+            : this(textureImage, position, speed, spriteSize, sheetSize, gameMap,
+              10, new Point(0, 0), defaultMillisecondsPerFrame)
         { }
 
-        public Sprite(Texture2D textureImage, Vector2 position, Point spriteSize, Point sheetSize, Map gameMap,
-            int collisionOffset, Point currentFrame, Vector2 speed)
-            : this(textureImage, position, spriteSize, sheetSize, gameMap, collisionOffset,
-              currentFrame, speed, defaultMillisecondsPerFrame)
+        public Sprite(Texture2D textureImage, Vector2 position, Vector2 speed, Point spriteSize, Point sheetSize, Map gameMap,
+            int collisionOffset, Point currentFrame)
+            : this(textureImage, position, speed, spriteSize, sheetSize, gameMap, collisionOffset,
+              currentFrame, defaultMillisecondsPerFrame)
         { }
 
-        public Sprite(Texture2D textureImage, Vector2 position, Point spriteSize, Point sheetSize, Map gameMap,
-            int collisionOffset, Point currentFrame, Vector2 speed, int millisecondsPerFrame)
+        public Sprite(Texture2D textureImage, Vector2 position, Vector2 speed, Point spriteSize, Point sheetSize, Map gameMap,
+            int collisionOffset, Point currentFrame, int millisecondsPerFrame)
         {
             this.textureImage = textureImage;
             this.position = position;
@@ -87,6 +88,12 @@ namespace Game_Algo
                 spriteSize.X - (collisionOffset * 2),
                 spriteSize.Y - (collisionOffset * 2));
             }
+        }
+
+        protected void MoveIfWalkable(Vector2 inputDirection)
+        {
+            if (gameMap.CheckTileWalkable(position + inputDirection))
+                position += inputDirection * speed;
         }
 
     }

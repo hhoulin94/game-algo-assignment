@@ -14,6 +14,8 @@ namespace Game_Algo
 
         static public Point PlayerSize = new Point(25, 25); // how many Tiles
 
+        static public Vector2 PlayerSpeed = new Vector2(2, 2);
+
         static public Point MapSize = new Point(30, 20); // how many Tiles
 
         static public Point TileSize = new Point(30, 30); // Tile dimensions (30px x 30px)
@@ -37,12 +39,12 @@ namespace Game_Algo
                 "##############################" + // 0
                 "#        #   #   #   #   #   #" + // 1
                 "#        #   #   #   #   #   #" + // 2
-                "#        ### ### ### ### ### #" + // 3
-                "#        #                   #" + // 4
+                "#        ###=###=###=###=###-#" + // 3
+                "#        #            G      #" + // 4
                 "#        #                   #" + // 5
-                "#        #  #####  ######## ##" + // 6
+                "#        #  #####  ########-##" + // 6
                 "#        #  #   #  #         #" + // 7
-                "#        #  #                #" + // 8
+                "#        #  #   =  -         #" + // 8
                 "#        #  ##################" + // 9
                 "#        #                   #" + // 10
                 "#        #                   #" + // 11
@@ -60,12 +62,35 @@ namespace Game_Algo
         {
             static public int Floor = 0;
             static public int Wall = 1;
+            static public int DoorUnlocked = 2;
+            static public int DoorLocked = 3;
+        }
+
+        public struct TileTypeChar
+        {
+            static public char Floor = ' ';
+            static public char Wall = '#';
+            static public char DoorUnlocked = '-';
+            static public char DoorLocked = '=';
+        }
+
+        static public int GetTileTypeByChar(char tileTypeChar) 
+        {
+            if (tileTypeChar == TileTypeChar.Floor)
+                return TileType.Floor;
+            if (tileTypeChar == TileTypeChar.Wall)
+                return TileType.Wall;
+            if (tileTypeChar == TileTypeChar.DoorLocked)
+                return TileType.DoorLocked;
+            if (tileTypeChar == TileTypeChar.DoorUnlocked)
+                return TileType.DoorUnlocked;
+
+            return 0;
         }
 
         static public Vector2 PointToVector2(Point PointOnMap)
         {
             return new Vector2(PointOnMap.X * TileSize.X, PointOnMap.Y * TileSize.Y);
         }
-        
     }
 }
