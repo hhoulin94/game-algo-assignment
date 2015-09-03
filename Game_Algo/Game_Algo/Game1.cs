@@ -14,7 +14,8 @@ namespace Game_Algo
 {
     /// <summary>
     /// This is the main type for your game
-    /// </summary>
+    /// </summary> 
+    /// chicken nugget 
     public class Game1 : Microsoft.Xna.Framework.Game
     {
         GraphicsDeviceManager graphics;
